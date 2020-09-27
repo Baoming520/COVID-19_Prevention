@@ -1,0 +1,26 @@
+{
+  "chrome_local": "C:\\Program Files (x86)\\Google\\Chrome\\Application",
+  "chrome_driver_mirrors": "https://npm.taobao.org/mirrors/chromedriver",
+  "chrome_driver_zip": "chromedriver_win32.zip",
+
+  "website": "https://www.kdocs.cn/l/s6V5ZfVqK?f=501",
+  "username": "15822305959",
+  "password": "Password01!",
+  "web_driver_dir": "./drives",
+  "web_driver_name": "chromedriver.exe",
+  "loading_timeout": 300,
+  "normal_timeout": 5,
+  "download_timeout": 10,
+  "download_folder": "C:\\Users\\dxl\\Downloads",
+  "download_filename_kw": "中国信保疫情期间人员信息统计表",
+  "move_folder": "./data",
+  "log_folder": "./logs",
+
+  "mail_host": "smtp.sinosure.com.cn",
+  "mail_port": 587,
+  "mail_pass": "!QAZ2wsx#EDC",
+  "mail_from_displayname": "王燕春",
+  "mail_from": "wangyanchun@sinosure.com.cn",
+  "mail_to_displayname": "数据下载报告",
+  "mail_to": "dingxuanliang@icloud.com"
+}
