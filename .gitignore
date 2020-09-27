@@ -1,8 +1,13 @@
 # All the ignored folders and files in the project "DownloadDataApp".
-./DownloadDataApp/build
-./DownloadDataApp/data
-./DownloadDataApp/dist
-./DownloadDataApp/main.exe
-./DownloadDataApp/main.spec
+DownloadDataApp/__pycache__
+DownloadDataApp/build
+DownloadDataApp/data
+DownloadDataApp/dist
+DownloadDataApp/drives
+DownloadDataApp/main.exe
+DownloadDataApp/main.spec
+
+!DownloadDataApp/drives/chromedriver.exe
+
 
 
