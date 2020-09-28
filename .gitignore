@@ -3,7 +3,8 @@ DownloadDataApp/__pycache__
 DownloadDataApp/build
 DownloadDataApp/data
 DownloadDataApp/dist
-DownloadDataApp/drives
+DownloadDataApp/drives/*
+DownloadDataApp/config.json
 DownloadDataApp/main.exe
 DownloadDataApp/main.spec
 
