@@ -8,7 +8,9 @@ DownloadDataApp/config.json
 DownloadDataApp/main.exe
 DownloadDataApp/main.spec
 
+# All the skip folders and files in the project "DownloadDataApp".
 !DownloadDataApp/drives/chromedriver.exe
+!DownloadDataApp/drives/bak/*
 
 
 
