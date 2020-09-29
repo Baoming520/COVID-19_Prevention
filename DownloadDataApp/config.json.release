@@ -1,5 +1,7 @@
 {
+  "@chrome_local.annotation": "",
   "chrome_local": "",
+  "@chrome_driver_mirrors.annotation": "Please use the taobao mirrors in China mainland",
   "chrome_driver_mirrors": "https://npm.taobao.org/mirrors/chromedriver",
   "chrome_driver_zip": "chromedriver_win32.zip",
 
