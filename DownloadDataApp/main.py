@@ -139,7 +139,7 @@ def job():
         # Choose the login option with an existing account
         # Go to account login page
         wd.find_element_by_xpath(
-            '//span[@class="js_toProtocolDialog tpItem tpItem_account"]').click()
+            '//div[@class="keepOnline_wrap"]/a[@class="js_toProtocolDialog"]').click()
 
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
