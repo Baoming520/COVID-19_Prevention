@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from utils.logit import Logit

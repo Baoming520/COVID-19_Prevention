@@ -1,9 +1,13 @@
 from functools import wraps
+from helper.mailhelper import send_mail
 import datetime
 import os
 
+logname = 'default.log'
+logfile = os.path.join('./logs', logname)
+
 class Logit(object):
-    def __init__(self, logFile):
+    def __init__(self, logFile=logfile):
         self.logFile = logFile
     
     def __call__(self, func):
@@ -23,5 +27,20 @@ class Logit(object):
                     mode = 'w+'
                 with open(self.logFile, mode) as fi:
                     fi.write(err_msg + '\n')
+                    self.notify(err_msg)
                 
         return decorated
+    def notify(self, msg):
+        # Do nothing here.
+        pass
+
+class EmailLogit(Logit):
+    def __init__(self, mail_to_list, subject, *args, **kwargs):
+        self.mail_to_list = mail_to_list
+        self.subject = subject
+        super(EmailLogit, self).__init__(*args, **kwargs)
+    
+    def notify(self, msg):
+        # Send the error message to the specified people with mails.
+        send_mail(msg, self.subject, self.mail_to_list)
+

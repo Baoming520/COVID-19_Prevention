@@ -1,106 +1,29 @@
 #!/usr/bin/python
-from email.mime.text import MIMEText
-from email.header import Header
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
 from utils.browserdriver import \
     check_version_consistency, \
     download_chrome_driver, \
     get_chrome_driver_version_list, \
     choose_matching_version, \
     upgrade_chrome_driver
+from helper.filehelper import copy_file, get_file_with_latest_version
+from helper.mailhelper import send_mail
 
 import datetime
 import json
 import os
 import schedule
-import shutil
-import smtplib
 import time
-import uuid
 
 # Read config file
 with open('./config.json', 'r', encoding='utf-8') as f:
     config = json.load(f)
 
-
-def get_latest_version(t_dir):
-    l_file = ''
-    l_time = 0
-    for f in os.listdir(t_dir):
-        f_modified_time = os.path.getmtime(os.path.join(t_dir, f))
-        if f_modified_time > l_time:
-            l_file = f
-            l_time = f_modified_time
-    return l_file, l_time
-
-
-def get_latest_version_v2(t_dir, fn_kw):
-    l_file = ''
-    l_time = 0
-    for f in os.listdir(t_dir):
-        if fn_kw in f:
-            f_modified_time = os.path.getmtime(os.path.join(t_dir, f))
-            if f_modified_time > l_time:
-                l_file = f
-                l_time = f_modified_time
-    return l_file, l_time
-
-
-def move_files(s_dir, t_dir, fn_kw):
-    for f in os.listdir(s_dir):
-        if fn_kw in f:
-            fpath = os.path.join(t_dir, f)
-            if os.path.exists(fpath):
-                os.remove(fpath)
-            shutil.move(os.path.join(s_dir, f), t_dir)
-
-
-def copy_file(s_dir, t_dir, fn_kw):
-    l_f, _ = get_latest_version_v2(s_dir, fn_kw)
-    f_updated_dt = datetime.datetime.fromtimestamp(_)
-    curr = datetime.datetime.now()
-    delta_t = (curr - f_updated_dt).seconds
-    if delta_t > 180:
-        failure_message = '文件版本异常，该文件创建时间已逾180秒，请重新下载'
-        log(config['log_folder'], failure_message + '\n')
-        send_mail(failure_message)  # TODO: 被发送的机率很小
-        return False
-    succ_message = '文件是最新的，创建时间在{}秒之内。'.format(delta_t)
-    log(config['log_folder'], succ_message + '\n')
-    # send_mail(succ_message)
-
-    # Hard code to verify the extension name of the file
-    if l_f.endswith("xlsx"):
-        shutil.copyfile(os.path.join(s_dir, l_f),
-                        os.path.join(t_dir, fn_kw + '.xlsx'))
-        return True
-    else:
-        return False
-
-
 def log(log_dir, msg):
     with open(os.path.join(log_dir, 'download.log'), 'a+') as f:
         f.write('{}:{}'.format(
             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), msg))
-
-
-def send_mail(message):
-    m_from = config['mail_from']
-    m_to_arr = [config['mail_to']]
-    html = '<p>{}</p>'.format(message)
-    m_msg = MIMEText(html, 'html', 'utf-8')
-    m_msg['From'] = Header(config['mail_from_displayname'], 'utf-8')
-    m_msg['To'] = Header('Download Report', 'utf-8')
-    m_msg['Subject'] = Header('Download Report', 'utf-8')
-    try:
-        o_smtp = smtplib.SMTP()
-        o_smtp.connect(config['mail_host'], config['mail_port'])
-        o_smtp.login(m_from, config['mail_pass'])
-        o_smtp.sendmail(m_from, m_to_arr, m_msg.as_string())
-    except smtplib.SMTPException:
-        log(config['log_folder'], '邮件发送失败！')
 
 def job():
     # Check the consistency of the two versions ("Chrome Browser" and "Chrome driver")
@@ -197,7 +120,7 @@ def job():
     res = copy_file(config['download_folder'],
                     config['move_folder'], config['download_filename_kw'])
     if res:
-        l_f, l_t = get_latest_version(config['move_folder'])
+        l_f, l_t = get_file_with_latest_version(config['move_folder'])
         log(config['log_folder'], '下载成功！\n')
         print('下载数据完成，本地数已是最新')
         print('数据更新时间为{}'.format(datetime.datetime.fromtimestamp(l_t)))
@@ -210,11 +133,13 @@ def job():
 
 def main(argv=None):
     job()
+
     # schedule.every(1).minutes.do(job)
     # schedule.every().hour.do(job)
     # while True:
     #   schedule.run_pending()
     #   time.sleep(1)
+    pass
 
 
 if __name__ == '__main__':
