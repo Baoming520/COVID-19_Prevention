@@ -1,4 +1,6 @@
 #!/usr/bin/python
+from helper.filehelper import copy_file, get_file_with_latest_version
+from helper.mailhelper import send_mail
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from utils.browserdriver import \
@@ -7,8 +9,7 @@ from utils.browserdriver import \
     get_chrome_driver_version_list, \
     choose_matching_version, \
     upgrade_chrome_driver
-from helper.filehelper import copy_file, get_file_with_latest_version
-from helper.mailhelper import send_mail
+from utils.logit import Logit, InfoLogit, SuccLogit
 
 import datetime
 import json
@@ -130,6 +131,14 @@ def job():
         log(config['log_folder'], '下载失败！\n')
         send_mail('下载数据失败！')
 
+logname = 'dev_test.log'
+logfile = os.path.join('./logs', logname)
+
+# @InfoLogit(logFile=logfile) # second
+# @SuccLogit(logFile=logfile) # first
+# @Logit(logFile=logfile)
+# def dev_test(x, y):
+#     return x + y
 
 def main(argv=None):
     job()

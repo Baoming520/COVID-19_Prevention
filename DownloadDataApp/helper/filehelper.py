@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from utils.logit import Logit, EmailLogit
+from utils.logit import Logit, EmailLogit, InfoLogit
 import datetime
 import json
 import os
@@ -34,7 +34,8 @@ def move_files(s_dir, t_dir, fn_kw=''):
         if fn_kw and fn_kw in f or not fn_kw:
             shutil.move(os.path.join(s_dir, f), t_dir)
 
-@EmailLogit([ config['mail_to'] ], 'Copy data file failure')
+@InfoLogit(logFile=logfile)
+@EmailLogit([ config['mail_to'] ], 'Copy download data file failure')
 def copy_file(s_dir, t_dir, fn_kw):
     l_f, _ = get_file_with_latest_version(s_dir, fn_kw)
     f_updated_dt = datetime.datetime.fromtimestamp(_)

@@ -4,6 +4,8 @@ DownloadDataApp/build
 DownloadDataApp/data
 DownloadDataApp/dist
 DownloadDataApp/drives/*
+DownloadDataApp/logs
+DownloadDataApp/helper/__pycache__
 DownloadDataApp/utils/__pycache__
 DownloadDataApp/config.json
 DownloadDataApp/main.exe
