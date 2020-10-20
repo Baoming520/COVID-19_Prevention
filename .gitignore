@@ -15,5 +15,18 @@ DownloadDataApp/main.spec
 !DownloadDataApp/drives/chromedriver.exe
 !DownloadDataApp/drives/bak
 
+# All the ignored folders and files in the project "MailSenderApp".
+MailSenderApp/.vs
+MailSenderApp/packages
+MailSenderApp/MailSenderApp/bin
+MailSenderApp/MailSenderApp/Data/*
+MailSenderApp/MailSenderApp/obj
+MailSenderApp/MailSenderApp/Outputs
+MailSenderApp/MailSenderApp/Properties
+MailSenderApp/MailSenderApp/Reports
+MailSenderApp/MailSenderApp/MailSenderApp.csproj.user
+
+# All the skip folders and files in the project "MailSenderApp".
+!MailSenderApp/MailSenderApp/Data/mail_queue_templ - sample.xlsx
 
 
