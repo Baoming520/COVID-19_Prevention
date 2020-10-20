@@ -30,27 +30,6 @@
             return text.Substring(lastIndex + 1 + offset);
         }
 
-        //public static string RemoveBackslashString(this string folderPath, int number)
-        //{
-        //    if (folderPath.Contains("\\"))
-        //    {
-        //        while (number > 0)
-        //        {
-        //            int lastSlashIndex = folderPath.LastIndexOf('\\');
-        //            if (lastSlashIndex == -1)
-        //            {
-        //                throw new Exception();
-        //            }
-
-        //            folderPath = folderPath.Remove(lastSlashIndex);
-        //            number--;
-        //        }
-        //    }
-
-        //    return folderPath;
-        //}
-
-
         public static IEnumerable<string> ParseTextWithSemicolon(this string text)
         {
             if (string.IsNullOrEmpty(text))
