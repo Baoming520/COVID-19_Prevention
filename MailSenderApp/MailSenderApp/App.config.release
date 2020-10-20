@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+  <appSettings>
+    <add key="MailFromAddr" value="" />
+    <add key="MailPassword" value="" />
+    <add key="FromDisplayName" value="" />
+    <add key="SMTPServer" value="" />
+    <add key="SMTPServerPort" value="" />
+    <add key="DataDir" value="..\..\Data"/>
+    <add key="MailConfigTemplate" value="mail_queue_templ.xlsx" />
+    <add key="XlSXTemplate" value="[Template]疫情期间人员信息统计表.xlsx" />
+    <add key="DataFile" value="..\..\Outputs\疫情期间人员信息统计表.xlsx" />
+    <add key="Outputs" value="..\..\Outputs"/>
+    <add key="ReportDir" value="" /><!--必须用绝对路径进行替换-->
+    <add key="ResponseTo" value="" /><!--填写反馈邮箱地址-->
+	
+	<!--特殊邮件联系人信息-->
+    <add key="SpecFrom" value="" />
+    <add key="SpecPwd" value="" />
+    <add key="SpecDisplay" value="" />
+    <add key="SpecTo" value="" /><!--用办公室联系人进行替换-->
+    
+    <!--新增如下配置项-->
+    <!--1. 邮件队列配置文件中，有效Sheet的名称-->
+    <!--2. 数据文件中，有效Sheet的名称-->
+    <add key="MailQueueSheetName" value="mail_queue" />
+    <add key="DataFileValidSheetName" value="收集表" />
+  </appSettings>
+</configuration>
