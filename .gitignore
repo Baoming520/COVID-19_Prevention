@@ -22,7 +22,6 @@ MailSenderApp/MailSenderApp/bin
 MailSenderApp/MailSenderApp/Data/*
 MailSenderApp/MailSenderApp/obj
 MailSenderApp/MailSenderApp/Outputs
-MailSenderApp/MailSenderApp/Properties
 MailSenderApp/MailSenderApp/Reports
 MailSenderApp/MailSenderApp/App.config
 MailSenderApp/MailSenderApp/MailSenderApp.csproj.user
