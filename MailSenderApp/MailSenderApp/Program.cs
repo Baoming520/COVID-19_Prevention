@@ -1,29 +1,32 @@
-﻿using MailSenderApp.RuleEngine;
-using MailSenderApp.Tools;
-using MailSenderApp.Utils;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-namespace MailSenderApp
+﻿namespace MailSenderApp
 {
+    #region Namespaces
+    using MailSenderApp.RuleEngine;
+    using MailSenderApp.Tools;
+    using MailSenderApp.Utils;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    #endregion
+
     class Program
     {
-        static string[] reportFields = new string[] { "Mail To", "Subject", "Has Attachments", "Status" };
+        static readonly string[] reportFields = new string[] { "Mail To", "Subject", "Has Attachments", "Status" };
+        static readonly string[] ruleReportFields = new string[] { "Rule ID", "Rule Description", "Passed", "Failed Message", "Failed Count", "Indexes/MsgTxts" };
         static List<string[]> reportData = new List<string[]>();
-        static string[] ruleReportFields = new string[] { "Rule ID", "Rule Description", "Passed", "Failed Message", "Failed Count", "Indexes/MsgTxts" };
         static Dictionary<RuleBase, ValidationResult> ruleExecResults;
+
         static void Main(string[] args)
         {
             if (args == null || args.Length == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("缺少必要参数：至少需要一个参数，参数值为\"all\"或\"spec\"。");
+                Console.WriteLine("缺少必要参数：至少需要一个参数，参数值为\"all\"或\"spec\"。"); // required parameter: "all" or "spec"
                 Console.ResetColor();
                 return;
             }
@@ -125,17 +128,12 @@ namespace MailSenderApp
                 var curr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 failureInfo = String.Format("[{0}]数据清洗或拆分异常，详细信息如下：\r\n{1}", curr, ex.Message);
                 Console.WriteLine(failureInfo);
-                //Console.WriteLine("Press any key to exit...");
-                //Console.ReadKey();
-                //return;
                 goto End;
             }
 
             msg = "Generate data cleanning report...";
             Console.WriteLine(msg);
             rReportFile = GenerateRReport("数据清洗结果报告", ruleReportFields, ruleExecResults);
-            //Console.WriteLine("Press any key to continue...");
-            //Console.ReadKey();
 
             string[][] rows = null;
             IExcelManager excelMgr = new OXExcelManager();
@@ -169,9 +167,6 @@ namespace MailSenderApp
                 var curr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 failureInfo = String.Format("[{0}]邮件队列配置异常，详细信息如下：\r\n{1}", curr, ex.Message);
                 Console.WriteLine(failureInfo);
-                //Console.WriteLine("Press any key to exit...");
-                //Console.ReadKey();
-                //return;
                 goto End;
             }
 
@@ -228,8 +223,6 @@ namespace MailSenderApp
             Console.WriteLine("Generating the report...");
             Thread.Sleep(1000);
             mReportFile = GenerateMReport("邮件发送报告", reportFields, reportData.ToArray());
-            //Console.Write("Press any key to exit...");
-            //Console.ReadKey();
 
             End:
             string resSubject = "疫情人员信息收集邮件发送报告 - To:所有处室和分支机构";
@@ -267,14 +260,15 @@ namespace MailSenderApp
 
                 Console.WriteLine("文件是最新的，创建/更新时间在{0}分之内", minutes);
 
+                #region Fixed WPS Official Issue
                 // wps文件没有完全按照相关协议保存，导致OpenXML读取失败，故在此处进行预处理
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("正在对xlsx文件进行预处理...");
                 Console.ResetColor();
                 string sheetName = ConfigurationManager.AppSettings["DataFileValidSheetName"];
                 ExcelManager.ReSave(dataFile, sheetName);
+                #endregion
 
-                
                 string[] dFields = excelDataMgr.ReadFields(dataFile, sheetName);
                 string[][] dRows = excelDataMgr.Read(dataFile, sheetName);
                 ProcessDataCleaning(dFields, ref dRows, out ruleExecResults); // Execute data cleaning
