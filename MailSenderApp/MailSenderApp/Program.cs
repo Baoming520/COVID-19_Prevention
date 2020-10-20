@@ -90,15 +90,15 @@
 
                 Console.WriteLine("文件是最新的，创建/更新时间在{0}分之内", minutes);
 
+                string sheetName = ConfigurationManager.AppSettings["DataFileValidSheetName"];
+
                 //#region Fixed WPS Official Issue
                 //// wps文件没有完全按照相关协议保存，导致OpenXML读取失败，故在此处进行预处理
                 //Console.ForegroundColor = ConsoleColor.Yellow;
                 //Console.WriteLine("正在对xlsx文件进行预处理...");
                 //Console.ResetColor();
-                //string sheetName = ConfigurationManager.AppSettings["DataFileValidSheetName"];
                 //ExcelManager.ReSave(dataFile, sheetName);
                 //#endregion
-
 
                 string[] dFields = excelDataMgr.ReadFields(dataFile, sheetName);
                 string[][] dRows = excelDataMgr.Read(dataFile, sheetName);
@@ -262,12 +262,13 @@
 
                 Console.WriteLine("文件是最新的，创建/更新时间在{0}分之内", minutes);
 
+                string sheetName = ConfigurationManager.AppSettings["DataFileValidSheetName"];
+
                 //#region Fixed WPS Official Issue
                 //// wps文件没有完全按照相关协议保存，导致OpenXML读取失败，故在此处进行预处理
                 //Console.ForegroundColor = ConsoleColor.Yellow;
                 //Console.WriteLine("正在对xlsx文件进行预处理...");
                 //Console.ResetColor();
-                //string sheetName = ConfigurationManager.AppSettings["DataFileValidSheetName"];
                 //ExcelManager.ReSave(dataFile, sheetName);
                 //#endregion
 
