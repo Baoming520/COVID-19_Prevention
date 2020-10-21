@@ -30,4 +30,12 @@ MailSenderApp/MailSenderApp/MailSenderApp.csproj.user
 !MailSenderApp/MailSenderApp/Data/mail_queue_templ - sample.xlsx
 !MailSenderApp/MailSenderApp/Data/[Template] PersonalInfo.xlsx
 
+# All the ignored folders and files in the project "RemoteControl".
+RemoteControl/.vscode
+RemoteControl/bin
+RemoteControl/data
+RemoteControl/node_modules
+RemoteControl/config.json
+# All the skip folders and files in the project "RemoteControl".
+
 

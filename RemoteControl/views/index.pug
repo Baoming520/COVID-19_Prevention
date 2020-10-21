@@ -1,0 +1,23 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/stylesheets/index.css')
+
+block content
+  div(class="container")
+    h1= title
+    p Select the following operations:
+    div(class="row")
+      button(id="downloadBtn" onclick="location.href='/download'" class="btn btn-default") Download Data
+    div(class="row")
+      button(id="sendMailBtn" class="btn btn-default") Mail To: ALL
+    div(class="row")
+      button(id="sendMailSpecBtn" class="btn btn-default") Mail To: SPEC
+    div(class="row")
+      button(id="updateMConfigBtn" class="btn btn-default") Update Mail Config
+      form(class="form-inline" action="/mconf/upload" method="post" enctype="multipart/form-data")
+        input(id="msconf" name="msconf" type="file" style="display: none;")
+        input(id="submit" name="submit" type="submit" style="display: none;")
+    div(class="row")
+      button(id="checkBtn"  onclick="location.href='/check'" class="btn btn-primary") Check Status
+block scripts
+  script(type="text/javascript" src="/javascripts/index.js")

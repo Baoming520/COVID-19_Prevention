@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  h5= description
+  p For details:
+  p Download Request: 
+    font(style="font-weight:bold" color='blue') #{download_request}
+  p Download Data: 
+    font(style="font-weight:bold") #{download_status}
+  p Send Mail Request: 
+    font(style="font-weight:bold" color='blue') #{sendM_request}
+  p Send Mail: 
+    font(style="font-weight:bold") #{sendM_status}
+  p Send Mail Spec Request: 
+    font(style="font-weight:bold" color='blue') #{sendMX_request}
+  p Send Mail Spec: 
+    font(style="font-weight:bold") #{sendMX_status}
+  p Update Mail's Config File Request: 
+    font(style="font-weight:bold" color='blue') #{upMConfig_request}
+  p Update Mail's Config File: 
+    font(style="font-weight:bold") #{upMConfig_status}
