@@ -4,29 +4,35 @@
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
   </startup>
   <appSettings>
-    <add key="MailFromAddr" value="" />
-    <add key="MailPassword" value="" />
-    <add key="FromDisplayName" value="" />
-    <add key="SMTPServer" value="" />
-    <add key="SMTPServerPort" value="" />
+    <add key="Browser" value="iexplore.exe"/>
+	<add key="ConfirmMailSubjectForAll" value="疫情人员信息收集邮件发送报告 - To:所有处室和分支机构"/><!--Updated at 2020/10/21-->
+    <add key="ConfirmMailSubjectForSpec" value="疫情人员信息收集邮件发送报告 - To:办公室"/><!--Updated at 2020/10/21-->
     <add key="DataDir" value="..\..\Data"/>
-    <add key="MailConfigTemplate" value="mail_queue_templ.xlsx" />
-    <add key="XlSXTemplate" value="[Template]疫情期间人员信息统计表.xlsx" />
-    <add key="DataFile" value="..\..\Outputs\疫情期间人员信息统计表.xlsx" />
+	<add key="DataFile" value="..\..\Outputs\疫情期间人员信息统计表.xlsx" />
+	<add key="DataFileModifiedWithin" value="30"/>
+	<add key="DataStatisticsFilePattern" value="疫情期间人员信息统计表({0})"/><!--Updated at 2020/10/21-->
+	<!--数据文件中，有效Sheet的名称-->
+	<add key="DataFileValidSheetName" value="收集表" />
+	<add key="FromDisplayName" value="王五" />
+	<add key="MailConfigTemplate" value="mail_queue_templ.xlsx" />
+    <add key="MailFromAddr" value="wangwu@163.com" />
+    <add key="MailPassword" value="wangwu's password" />
+	<!--邮件队列配置文件中，有效Sheet的名称-->
+	<add key="MailQueueSheetName" value="mail_queue" />
     <add key="Outputs" value="..\..\Outputs"/>
-    <add key="ReportDir" value="" /><!--必须用绝对路径进行替换-->
-    <add key="ResponseTo" value="" /><!--填写反馈邮箱地址-->
+	<add key="ReportDir" value="" /><!--必须用绝对路径进行替换-->
+    <add key="ResponseTo" value="wangwu@163.com;zhaoliu@163.com" /><!--填写反馈邮箱地址-->
+    <add key="SMTPServer" value="smtp.163.com" />
+    <add key="SMTPServerPort" value="465" />
 	
 	<!--特殊邮件联系人信息-->
-    <add key="SpecFrom" value="" />
-    <add key="SpecPwd" value="" />
-    <add key="SpecDisplay" value="" />
-    <add key="SpecTo" value="" /><!--用办公室联系人进行替换-->
+    <add key="SpecFrom" value="wangwu@163.com" />
+    <add key="SpecPwd" value="wangwu's password" />
+    <add key="SpecDisplay" value="王五" />
+    <add key="SpecTo" value="zhangsan@163.com;lisi@163.com" /><!--用办公室联系人进行替换-->
+	<add key="SpecBody_RecieverNames" value="张三、李四"/><!--Updated at 2020/10/21-->
+    <add key="SpecBody_Content" value="今天的数据，请查收。"/><!--Updated at 2020/10/21-->
     
-    <!--新增如下配置项-->
-    <!--1. 邮件队列配置文件中，有效Sheet的名称-->
-    <!--2. 数据文件中，有效Sheet的名称-->
-    <add key="MailQueueSheetName" value="mail_queue" />
-    <add key="DataFileValidSheetName" value="收集表" />
+    <add key="XlSXTemplate" value="[Template]疫情期间人员信息统计表.xlsx" />
   </appSettings>
 </configuration>

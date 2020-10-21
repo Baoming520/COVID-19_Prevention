@@ -75,6 +75,7 @@
     <Compile Include="RuleEngine\Rules.cs" />
     <Compile Include="RuleEngine\ValidationResult.cs" />
     <Compile Include="Tools\TimeTracker.cs" />
+    <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ExcelManager.cs" />
     <Compile Include="Utils\IExcelManager.cs" />
     <Compile Include="Utils\OpenXMLCellReferenceNullException.cs" />

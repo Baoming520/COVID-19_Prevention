@@ -1,6 +1,7 @@
 ﻿namespace MailSenderApp.Utils
 {
     #region Namespace.
+    using MailSenderApp.Utils;
     using Microsoft.Office.Interop.Excel;
     using System;
     using System.IO;
@@ -42,7 +43,7 @@
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\r\n" + ex.Message + "\r\n");
+                Console.WriteLine(Constants.CRLF + ex.Message + Constants.CRLF);
                 Console.ResetColor();
 
                 excelApp.Quit();
