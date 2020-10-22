@@ -1,0 +1,47 @@
+[
+    {
+        
+        "alias": "download",
+        "env": "C:\\Users\\dxl\\Desktop\\DownloadDataApp",
+        "exe": "main.exe",
+        "interval": 3000,
+        "name": "Download",
+        "opGroup": "rc_operations",
+        "params": []
+    },
+    {
+        "alias": "sendMail",
+        "env": "C:\\Users\\dxl\\Desktop\\MailSenderApp\\MailSenderApp\\bin\\Debug",
+        "exe": "MailSenderApp.exe",
+        "name": "SendMailToAll",
+        "interval": 3000,
+        "opGroup": "rc_operations",
+        "params": [
+            "all"
+        ]
+    },
+    {
+        "alias": "sendMailX",
+        "env": "C:\\Users\\dxl\\Desktop\\MailSenderApp\\MailSenderApp\\bin\\Debug",
+        "exe": "MailSenderApp.exe",
+        "name": "SendMailToSpec",
+        "interval": 3000,
+        "opGroup": "rc_operations",
+        "params": [
+            "spec"
+        ]
+    },
+    {
+        "alias": "updateConfig",
+        "env": "C:\\Users\\dxl\\Desktop\\RemoteReceiver\\addins",
+        "exe": "download.exe",
+        "name": "GetUpdatedMailConfig",
+        "interval": 10000,
+        "opGroup": "rc_operations",
+        "params": [
+            "http://149.129.58.158:8888/mconf/",
+            "C:\\Users\\dxl\\Desktop\\MailSenderApp\\MailSenderApp\\Data\\test",
+            "mail_queue_templ.xlsx"
+        ]
+    }
+]

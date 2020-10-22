@@ -37,5 +37,19 @@ RemoteControl/data
 RemoteControl/node_modules
 RemoteControl/config.json
 # All the skip folders and files in the project "RemoteControl".
+# None.
+
+# All the ignored folders and files in the project "RemoteReceiver".
+RemoteReceiver/.vscode
+RemoteReceiver/addins/DownloadFiles/__pycache__
+RemoteReceiver/addins/DownloadFiles/build
+RemoteReceiver/addins/DownloadFiles/data/*
+RemoteReceiver/addins/DownloadFiles/dist
+RemoteReceiver/addins/DownloadFiles/download.exe
+RemoteReceiver/addins/DownloadFiles/download.spec
+RemoteReceiver/node_modules
+RemoteReceiver/config.json
+# All the skip folders and files in the project "RemoteReceiver".
+# None.
 
 
