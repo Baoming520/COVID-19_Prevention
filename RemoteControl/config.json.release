@@ -1,7 +1,69 @@
 {
+    "server": {
+        "port": 8888
+    },
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
         "password": ""
+    },
+    "log4js": {
+        "appenders": {
+            "dev_file": {
+                "type": "file",
+                "filename": "logs/dev.log"
+            },
+            "dev_console": {
+                "type": "console"
+            },
+            "rc_console_trace": {
+                "type": "console"
+            },
+            "rc_file_trace": {
+                "type": "file",
+                "filename": "logs/trace.log"
+            },
+            "rc_console_debug": {
+                "type": "console"
+            },
+            "rc_file_debug": {
+                "type": "file",
+                "filename": "logs/debug.log"
+            },
+            "rc_datefile_release": {
+                "type": "DateFile",
+                "filename": "logs/log.log",
+                "pattern": "-yyyy-MM-dd.log"
+            },
+            "rc_console_release": {
+                "type": "console"
+            }
+        },
+        "categories": {
+            "default": {
+                "appenders": ["rc_datefile_release", "rc_console_release"],
+                "level": "ERROR"
+            },
+            "release": 
+            {
+                "appenders": ["rc_datefile_release"],
+                "level": "FATAL"
+            },
+            "debug": 
+            {
+                "appenders": ["rc_console_debug", "rc_file_debug"],
+                "level": "DEBUG"
+            },
+            "trace": {
+                "appenders": ["rc_console_trace", "rc_file_trace"],
+                "level": "TRACE"
+            },
+            
+            "dev": {
+                "appenders": ["dev_console", "dev_file"],
+                "level": "TRACE"
+            }
+            
+        }
     }
 }

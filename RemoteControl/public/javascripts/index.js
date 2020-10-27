@@ -1,8 +1,9 @@
 // Document ready event.
-$(document).ready(function () {
+$(() => {
+  // The home page has been loaded successfully.
 });
 
-$('#sendMailBtn').click(function (e) {
+$('#sendMailBtn').on('click', (e) => {
   var formData = new FormData();
   formData.append('token', '5oiR54ix5aSn54aK54yr');
   $.ajax({
@@ -30,7 +31,7 @@ $('#sendMailBtn').click(function (e) {
   });
 });
 
-$('#sendMailSpecBtn').click(function (e) {
+$('#sendMailSpecBtn').on('click', (e) => {
   var formData = new FormData();
   formData.append('token', '5oiR54ix5aSn54aK54yr');
   $.ajax({
@@ -58,11 +59,11 @@ $('#sendMailSpecBtn').click(function (e) {
   });
 });
 
-$('#updateMConfigBtn').click(function (e) {
+$('#updateMConfigBtn').on('click', (e) => {
   $('#msconf').trigger('click');
 });
 
-$('#msconf').change(function (e) {
+$('#msconf').on('change', (e) => {
   var files = e.target.files;
   if (files.length === 0) {
     return;

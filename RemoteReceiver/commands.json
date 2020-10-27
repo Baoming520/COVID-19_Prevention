@@ -33,7 +33,7 @@
     },
     {
         "alias": "updateConfig",
-        "env": "C:\\Users\\dxl\\Desktop\\RemoteReceiver\\addins",
+        "env": "C:\\Users\\dxl\\Desktop\\RemoteReceiver\\addins\\DownloadFiles",
         "exe": "download.exe",
         "name": "GetUpdatedMailConfig",
         "interval": 10000,

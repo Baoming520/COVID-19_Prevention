@@ -34,8 +34,10 @@ MailSenderApp/MailSenderApp/MailSenderApp.csproj.user
 RemoteControl/.vscode
 RemoteControl/bin
 RemoteControl/data
+RemoteControl/logs
 RemoteControl/node_modules
 RemoteControl/config.json
+RemoteControl/dev.js
 # All the skip folders and files in the project "RemoteControl".
 # None.
 

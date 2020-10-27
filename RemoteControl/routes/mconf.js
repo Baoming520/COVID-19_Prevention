@@ -27,13 +27,13 @@ var upload = multer({ storage: storage });
 /* POST: Upload mail sender's configuration file */
 router.post('/upload', upload.single('msconf'), function (req, res, next) {
   // var file = req.file;
-  cli.hset('rc_operations', 'updateConfig', true);
-  cli.hset('rc_operations', 'updateConfig_status', 'Pending');
+  cli.hset('RC_Actions', 'UpdateMailConfig_Request', true);
+  cli.hset('RC_Actions', 'UpdateMailConfig_Status', 'Pending');
   res.render('success', {
     title: 'COVID-19 Data Processing System Remote Control',
     subtitle: '- Upload MailSender App\'s config file',
     description: 'Used to update the contact information for MailSender App.',
-    operation: 'UPDATE',
+    operation: 'UPDATE_MAIL_CONFIG',
     delay: 10
   });
 });

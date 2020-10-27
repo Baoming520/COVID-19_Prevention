@@ -4,19 +4,29 @@ block content
   h1= title
   h5= description
   p For details:
-  p Download Request: 
-    font(style="font-weight:bold" color='blue') #{download_request}
-  p Download Data: 
-    font(style="font-weight:bold") #{download_status}
-  p Send Mail Request: 
-    font(style="font-weight:bold" color='blue') #{sendM_request}
-  p Send Mail: 
-    font(style="font-weight:bold") #{sendM_status}
-  p Send Mail Spec Request: 
-    font(style="font-weight:bold" color='blue') #{sendMX_request}
-  p Send Mail Spec: 
-    font(style="font-weight:bold") #{sendMX_status}
-  p Update Mail's Config File Request: 
-    font(style="font-weight:bold" color='blue') #{upMConfig_request}
-  p Update Mail's Config File: 
-    font(style="font-weight:bold") #{upMConfig_status}
+  table(class="table table-striped table-hover")
+    thead
+      tr 
+        th Operation Name
+        th Has Request
+        th Status
+    tbody
+      tr
+        th Download Data
+        td(id="download_request")
+        td(id="download_status")
+      tr 
+        th Mail To Departments
+        td(id="mailAll_request") 
+        td(id="mailAll_status")
+      tr 
+        th Mail To Office
+        td(id="mailSpec_request")
+        td(id="mailSpec_status")
+      tr 
+        th Update MailQ Config
+        td(id="updateMailConfig_request")
+        td(id="updateMailConfig_status")
+
+block scripts
+  script(type="text/javascript" src="/javascripts/check.js")
