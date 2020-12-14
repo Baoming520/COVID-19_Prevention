@@ -92,11 +92,11 @@ def choose_matching_version(version_list, expected_version):
             av_arr = [int(x) for x in version.split('.')]
             ev_arr = [int(x) for x in expected_version.split('.')]
             if len(av_arr) != len(ev_arr):
-                ret = '.'.join(av_arr)
+                ret = '.'.join([str(x) for x in av_arr])
             else:
                 lIdx = len(av_arr) - 1
                 if av_arr[lIdx] == ev_arr[lIdx]:
-                    ret = '.'.join(av_arr)
+                    ret = '.'.join([str(x) for x in av_arr])
                     return ret
                 else:
                     if maxV < av_arr[lIdx]:
