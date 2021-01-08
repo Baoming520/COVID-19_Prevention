@@ -68,8 +68,9 @@ def get_chrome_driver_version_list(driver_mirrors):
     version_list = []
     r = requests.get(driver_mirrors)
     if r and r.status_code == 200:
-        soup = BeautifulSoup(r.text, 'html.parser', from_encoding='utf-8')
-        links = soup.find_all('a')
+        #soup = BeautifulSoup(r.text, 'html.parser', from_encoding='utf-8')
+        soup = BeautifulSoup(r.text, 'html.parser')
+        links = soup.find_all('a') # If there is no 'a' element, the parameter 'links' will be set to empty.
         for link in links:
             m = re.match('^[0-9]+(.[0-9]+)*/$', link.next)
             if m != None:
@@ -86,6 +87,9 @@ def get_chrome_driver_version_list(driver_mirrors):
 def choose_matching_version(version_list, expected_version):
     ret = ''
     maxV = 0
+    if not version_list: # The parameter 'version_list' must not be set to None.
+        return ret
+
     for version in version_list:
         v = version[:version.rindex('.')]
         if expected_version.startswith(v):
