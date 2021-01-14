@@ -9,49 +9,49 @@
     {
         public List<RuleBase> AllRules = new List<RuleBase>
         {
-            new RuleBase()
-            {
-                ID = "R1",
-                Name = "R_CheckDate",
-                Description = "去掉所有提交时间非当前日期的记录，并将“填报日期”以“提交时间”填充",
-                FailedMessage = "“提交时间”与当前时间不一致",
-                TakeActionMethod = (DataContext context, ref string[][] records, out ValidationResult result) =>
-                {
-                    result = new ValidationResult();
-                    var res = new List<string[]>();
-                    var indexes = new List<int>();
-                    foreach(var row in records)
-                    {
-                        var currDate = DateTime.Now;
-                        var submitDate = row[context.Mappings["提交时间"]];
-                        double oaData;
-                        bool flag = Double.TryParse(submitDate, out oaData);
-                        DateTime actSubmitDate;
-                        if(flag == false)
-                        {
-                            actSubmitDate = DateTime.Parse(submitDate);
-                        }
-                        else
-                        {
-                            actSubmitDate = DateTime.FromOADate(oaData);
-                        }
+            //new RuleBase()
+            //{
+            //    ID = "R1",
+            //    Name = "R_CheckDate",
+            //    Description = "去掉所有提交时间非当前日期的记录，并将“填报日期”以“提交时间”填充",
+            //    FailedMessage = "“提交时间”与当前时间不一致",
+            //    TakeActionMethod = (DataContext context, ref string[][] records, out ValidationResult result) =>
+            //    {
+            //        result = new ValidationResult();
+            //        var res = new List<string[]>();
+            //        var indexes = new List<int>();
+            //        foreach(var row in records)
+            //        {
+            //            var currDate = DateTime.Now;
+            //            var submitDate = row[context.Mappings["提交时间"]];
+            //            double oaData;
+            //            bool flag = Double.TryParse(submitDate, out oaData);
+            //            DateTime actSubmitDate;
+            //            if(flag == false)
+            //            {
+            //                actSubmitDate = DateTime.Parse(submitDate);
+            //            }
+            //            else
+            //            {
+            //                actSubmitDate = DateTime.FromOADate(oaData);
+            //            }
 
-                        if(currDate.Date == actSubmitDate.Date)
-                        {
-                            row[context.Mappings["填报日期（已删除）"]] = actSubmitDate.ToString("yyyy年M月d日");
-                            res.Add(row);
-                        }
-                        else
-                        {
-                            var orgIndex = context.GetRecordIndex(row);
-                            indexes.Add(orgIndex);
-                        }
-                    }
+            //            if(currDate.Date == actSubmitDate.Date)
+            //            {
+            //                row[context.Mappings["填报日期（已删除）"]] = actSubmitDate.ToString("yyyy年M月d日");
+            //                res.Add(row);
+            //            }
+            //            else
+            //            {
+            //                var orgIndex = context.GetRecordIndex(row);
+            //                indexes.Add(orgIndex);
+            //            }
+            //        }
 
-                    records = res.ToArray();
-                    result.FailedRowIndexes = indexes.ToArray();
-                }
-            },
+            //        records = res.ToArray();
+            //        result.FailedRowIndexes = indexes.ToArray();
+            //    }
+            //},
             new RuleBase()
             {
                 ID = "R2",

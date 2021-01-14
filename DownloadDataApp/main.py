@@ -45,25 +45,31 @@ def job():
     try:
         wd.get(config['website'])
 
-        # Click the "login and edit" button to login
-        # Set the timeout for loading page
-        wd.implicitly_wait(config['loading_timeout'])
-        login_btn = wd.find_element_by_xpath(
-            '//div[@class="component-login-modal-pop"]/div[@class="modal-wrap s"]/div[@class="component-text-btn system"]')
-        login_btn.click()  # Go to the login options page
+        # Confirmation: Invite to cooperate
+        wd.find_element_by_xpath(
+            '//div[@class="preview-error-container coopInvite"]/a/button[@class="el-button btn btn-allow el-button--primary"]').click()
 
         # Wait for loading the login options page
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
         print('INFO: 登陆选项页面加载成功')
 
-        # Accept the user login protocol on login options page
-        wd.find_element_by_id('loginProtocal').click()
+        
+        # Agree the protocol and policy
+        agree_checkbox = wd.find_element_by_id('loginProtocal')
+        agree_checkbox.click()
+
+        # Click the "login and edit" button to login
+        # Set the timeout for loading page
+        wd.implicitly_wait(config['loading_timeout'])
 
         # Choose the login option with an existing account
         # Go to account login page
-        wd.find_element_by_xpath(
-            '//div[@class="keepOnline_wrap"]/a[@class="js_toProtocolDialog"]').click()
+        # login_btn = wd.find_element_by_xpath(
+        #     '//div[@class="component-login-modal-pop"]/div[@class="modal-wrap s"]/div[@class="component-text-btn system"]')
+        login_btn = wd.find_element_by_xpath(
+            '//div[@id="mainWrap"]/div[@class="keepOnline_wrap"]/a[@data-to="accountWrap"]')
+        login_btn.click()  # Go to the login options page
 
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
@@ -90,8 +96,9 @@ def job():
         menu_btn = wd.find_element_by_xpath(
             '//div[@class="component-icon-btn header-more-btn"]')
         # Wait for loading the actions for the menu button
-        time.sleep(config['normal_timeout'])
+        time.sleep(config['normal_timeout'] + 3)  # Add a buffer timeout here
         menu_btn.click()
+        
 
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
