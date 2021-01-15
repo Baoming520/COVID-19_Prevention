@@ -195,7 +195,7 @@
                 #region #TODO: Try to move this part to the file MailHelper.cs
                 if (MailHelper.ValidateAttachments(mAttach.ParseTextWithSemicolon()))
                 {
-                    MailHelper.SendMail(mTo, mCC, mAttach, mSubject, mBody, out mailReportData);
+                    MailHelper.SendMail(mTo, mCC, mAttach, mSubject, mBody, ref mailReportData);
                 }
                 else
                 {
@@ -232,7 +232,7 @@
 
             logMsg = "确认邮件发送结果：" + Constants.CRLF + Constants.SendingMailMessageHeader;
             Console.WriteLine(logMsg);
-            MailHelper.SendMail(ConfigurationManager.AppSettings["ResponseTo"], String.Empty, resAttachments, resSubject, resBody, out mailReportData, spec: true);
+            MailHelper.SendMail(ConfigurationManager.AppSettings["ResponseTo"], String.Empty, resAttachments, resSubject, resBody, ref mailReportData, spec: true);
             #endregion
         }
 
@@ -323,7 +323,7 @@
             {
                 string subject = fileName;
                 string body = String.Format("{0}：<br>&nbsp;&nbsp;&nbsp;&nbsp;{1}<br>", ConfigurationManager.AppSettings["SpecBody_RecieverNames"], ConfigurationManager.AppSettings["SpecBody_Content"]);
-                MailHelper.SendMail(ConfigurationManager.AppSettings["SpecTo"], String.Empty, outputFile, subject, body, out mailReportData, spec: true);
+                MailHelper.SendMail(ConfigurationManager.AppSettings["SpecTo"], String.Empty, outputFile, subject, body, ref mailReportData, spec: true);
             }
             catch (Exception ex)
             {
@@ -348,7 +348,7 @@
 
             logMsg = "确认邮件发送结果：" + Constants.CRLF + Constants.SendingMailMessageHeader;
             Console.WriteLine(logMsg);
-            MailHelper.SendMail(ConfigurationManager.AppSettings["ResponseTo"], String.Empty, rReportFile, resSubject, resBody, out mailReportData, spec: true);
+            MailHelper.SendMail(ConfigurationManager.AppSettings["ResponseTo"], String.Empty, rReportFile, resSubject, resBody, ref mailReportData, spec: true);
             #endregion
         }
     }

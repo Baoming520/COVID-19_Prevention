@@ -42,7 +42,7 @@
                 return new List<string>() { text };
             }
 
-            var items = text.Split(';');
+            var items = text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             var list = new List<string>();
             foreach (var address in items)
             {

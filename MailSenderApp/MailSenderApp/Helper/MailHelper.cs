@@ -12,9 +12,8 @@
 
     public static class MailHelper
     {
-        public static void SendMail(string mailTo, string mailCc, string attachments, string subject, string mbody, out List<string[]> reportData, bool spec = false)
+        public static void SendMail(string mailTo, string mailCc, string attachments, string subject, string mbody, ref List<string[]> reportData, bool spec = false)
         {
-            reportData = new List<string[]>();
             if (!spec)
             {
                 MailHelper.SendMail(
@@ -28,7 +27,7 @@
                     attachments,
                     subject,
                     mbody,
-                    out reportData);
+                    ref reportData);
             }
             else
             {
@@ -43,7 +42,7 @@
                     attachments,
                     subject,
                     mbody,
-                    out reportData);
+                    ref reportData);
             }
         }
 
@@ -79,10 +78,9 @@
             string attachments,
             string subject,
             string mbody,
-            out List<string[]> reportData)
+            ref List<string[]> reportData)
         {
             int loop = MailHelper.RETRY_COUNT;
-            reportData = new List<string[]>();
             var mailSender = new MailSender();
             mailSender.MailFromAddr = mailFrom;
             mailSender.MailFromPwd = mailPassword;
@@ -124,7 +122,5 @@
                 reportData.Add(new string[] { mailTo, subject, ValidateAttachments(attArr) ? "有" : "无", "发送失败" });
             }
         }
-
-        
     }
 }
