@@ -3,15 +3,11 @@ var express = require('express');
 var fs = require('fs');
 var multer = require('multer');
 var path = require('path');
-var redis = require('redis');
+var RedisCommunicator = require('../utils/redisCommunicator');
 const { route } = require('./users');
 
 var router = express.Router();
-var options = { auth_pass: config.redis.password };
-var cli = redis.createClient(config.redis.port, config.redis.host, options);
-cli.on('connect', () => {
-  console.log('[mconf_router]: Connected to Redis server.');
-});
+var cli = RedisCommunicator.getInstance("mconf router", config.redis.host, config.redis.port, config.redis.password).client;
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

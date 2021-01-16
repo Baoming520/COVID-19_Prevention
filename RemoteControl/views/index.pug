@@ -7,11 +7,11 @@ block content
     h1= title
     p Select the following operations:
     div(class="row")
-      button(id="downloadBtn" onclick="location.href='/download'" class="btn btn-default") Download Data
+      button(id="downloadBtn" class="btn btn-default") Download Data
     div(class="row")
-      button(id="sendMailBtn" class="btn btn-default") Mail To: ALL
+      button(id="mailAllBtn" class="btn btn-default") Mail To: ALL
     div(class="row")
-      button(id="sendMailSpecBtn" class="btn btn-default") Mail To: SPEC
+      button(id="mailSpecBtn" class="btn btn-default") Mail To: SPEC
     div(class="row")
       button(id="updateMConfigBtn" class="btn btn-default") Update Mail Config
       form(class="form-inline" action="/mconf/upload" method="post" enctype="multipart/form-data")
