@@ -1,3 +1,0 @@
-world
-
-This is a testing file.
