@@ -2,7 +2,12 @@
 from helper.filehelper import copy_file, get_file_with_latest_version
 from helper.mailhelper import send_mail
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait as WDWait
+
 from utils.browserdriver import \
     check_version_consistency, \
     download_chrome_driver, \
@@ -39,9 +44,15 @@ def job():
             return
 
     # Load Chrome driver
-    web_driver_path = os.path.join(
-        config['web_driver_dir'], config['web_driver_name'])
-    wd = webdriver.Chrome(web_driver_path)
+    web_driver_path = os.path.join(config['web_driver_dir'], config['web_driver_name'])
+    if config['chrome_headless_mode']:
+        # Config with headless mode
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        wd = webdriver.Chrome(web_driver_path, chrome_options=chrome_options)
+    else:
+        wd = webdriver.Chrome(web_driver_path)
+
     try:
         wd.get(config['website'])
 
@@ -53,7 +64,6 @@ def job():
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
         print('INFO: 登陆选项页面加载成功')
-
         
         # Agree the protocol and policy
         agree_checkbox = wd.find_element_by_id('loginProtocal')
@@ -82,24 +92,30 @@ def job():
         # Execute the verification
         wd.find_element_by_id('rectMask').click()
         # Wait for verification for a few seconds
-        time.sleep(config['normal_timeout'])
+        ver_text = wd.find_element_by_id('SM_TXT_1').text
+        while ver_text != '验证成功':
+            time.sleep(config['normal_timeout'])
+            ver_text = wd.find_element_by_id('SM_TXT_1').text
         # Remove the keep online mode
         wd.find_element_by_id('keepOnline').click()
         # Click the login button
-        wd.find_element_by_id('login').click()  # Go to the personal info page
-
-        # Wait for loading personal info page
-        # Set the timeout for loading page
-        wd.implicitly_wait(config['loading_timeout'])
+        loginBtn = wd.find_element_by_id('login')
+        # loginBtn.click()  # Go to the personal info page
+        wd.execute_script('arguments[0].click();', loginBtn)
         print('INFO: 返回数据页面')
-        # menu_btn = wd.find_element_by_id('header-more-btn') # There is no 'id' property in the menu-btn (div).
+
+        # Wait for the data page is loaded completely
+        print('[START]: Waiting for the specified element')
+        WDWait(wd, 20).until(EC.presence_of_all_elements_located((By.ID, 'root'))) # Waiting for the menu button
+        WDWait(wd, 20).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.component-icon-btn.header-more-btn'))) # The class name has more than one values
+        print('[END]: Found the element')
+
+        time.sleep(config['normal_timeout'] + 5)
+        
         menu_btn = wd.find_element_by_xpath(
             '//div[@class="component-icon-btn header-more-btn"]')
-        # Wait for loading the actions for the menu button
-        time.sleep(config['normal_timeout'] + 3)  # Add a buffer timeout here
         menu_btn.click()
         
-
         # Set the timeout for loading page
         wd.implicitly_wait(config['loading_timeout'])
         # menu_items = wd.find_elements_by_xpath('//div[@class="component-menu-item only-text"]')
