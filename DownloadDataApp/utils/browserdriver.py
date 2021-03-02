@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from utils.logit import Logit
 import json
 import os
@@ -145,9 +146,12 @@ def get_chrome_browser_version(installation_path):
 
 @Logit(logfile)
 def get_chrome_driver_version(driver_path):
+    # Config with the headless mode
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
     # Try to load the chrome driver
     web_driver_path = os.path.join(driver_path)
-    with webdriver.Chrome(web_driver_path) as driver:
+    with webdriver.Chrome(web_driver_path, chrome_options=chrome_options) as driver:
         # Try to get the version of chrome driver
         driver_version = driver.capabilities['chrome']['chromedriverVersion']
         m = re.match('[0-9]+(.[0-9]+)*', driver_version)
