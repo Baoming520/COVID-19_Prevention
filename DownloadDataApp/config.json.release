@@ -24,5 +24,7 @@
   "mail_from_displayname": "",
   "mail_from": "",
   "mail_to_displayname": "数据下载报告",
-  "mail_to": ""
+  "mail_to": "",
+  
+  "yun_item_name": ""
 }
