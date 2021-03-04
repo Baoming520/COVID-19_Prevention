@@ -37,6 +37,8 @@ def move_files(s_dir, t_dir, fn_kw=''):
 @InfoLogit(logFile=logfile)
 @EmailLogit([ config['mail_to'] ], 'Copy download data file failure')
 def copy_file(s_dir, t_dir, fn_kw):
+    if not os.path.exists(t_dir):
+        os.mkdir(t_dir)
     l_f, _ = get_file_with_latest_version(s_dir, fn_kw)
     f_updated_dt = datetime.datetime.fromtimestamp(_)
     curr = datetime.datetime.now()

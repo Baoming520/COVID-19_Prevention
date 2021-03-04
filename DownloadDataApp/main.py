@@ -27,7 +27,7 @@ with open('./config.json', 'r', encoding='utf-8') as f:
     config = json.load(f)
 
 def log(log_dir, msg):
-    with open(os.path.join(log_dir, 'download.log'), 'a+') as f:
+    with open(os.path.join(log_dir, 'download.log'), 'a+', encoding='utf-8') as f:
         f.write('{}:{}'.format(
             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), msg))
 
